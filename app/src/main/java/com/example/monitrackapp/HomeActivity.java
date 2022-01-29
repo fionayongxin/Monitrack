@@ -1,5 +1,6 @@
 package com.example.monitrackapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -124,6 +126,24 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(getApplicationContext(), "Signed out.", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 break;
+
+            case R.id.delete_user:
+                new AlertDialog.Builder(HomeActivity.this)
+                        .setTitle("Are you sure?")
+                        .setMessage("\nDeleting this account will result in completely" +
+                                "removing your account from the system and you won't be able to recover the data.")
+                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int i) {
+                                FirebaseAuth.getInstance().getCurrentUser().delete();
+                                Toast.makeText(getApplicationContext(), "User account deleted.", Toast.LENGTH_LONG).show();
+                                FirebaseAuth.getInstance().signOut();
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+                break;
+
         }
 
         if (fragment!=null) {
