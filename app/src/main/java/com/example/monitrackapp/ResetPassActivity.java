@@ -41,7 +41,7 @@ public class ResetPassActivity extends AppCompatActivity {
         resetPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             //   resetPassword();
+                resetPassword();
 
             }
         });
