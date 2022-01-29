@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#D6ECD8"
+    android:fitsSystemWindows="true"
+    tools:context=".ResetPassActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:gravity="center"
+            android:text="Reset Password"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textStyle="bold"
+            android:paddingTop="150dp"
+            android:textColor="@color/black"
+            android:id="@+id/forgot_password"/>
+
+        <ImageView
+            android:id="@+id/reset_pass_icon"
+            android:layout_width="81dp"
+            android:layout_height="117dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/lock" />
+
+        <EditText
+            android:id="@+id/email_reset_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:padding="15dp"
+            android:hint="Email"
+            android:background="#30ffffff" />
+
+        <Button
+            android:id="@+id/reset_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:text="Send email"
+            android:textStyle="bold"
+            android:textColor="#3F51B5"
+            android:backgroundTint="#FFEDA3"
+            android:textAppearance="?android:textAppearanceMedium"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:ignore="MissingConstraints" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

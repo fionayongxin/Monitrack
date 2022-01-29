@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "683114051487",
+    "project_id": "monitrack-3d683",
+    "storage_bucket": "monitrack-3d683.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683114051487:android:36bc3d1df0b36a605cefaa",
+        "android_client_info": {
+          "package_name": "com.example.monitrackapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "683114051487-2sdtgsd99h75eeu6m79vb85bnr3ij92g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9FKNcexKRTRH9SKtZBPUlLkMlOm46Slg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "683114051487-2sdtgsd99h75eeu6m79vb85bnr3ij92g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
