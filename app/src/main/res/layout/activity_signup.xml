@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ACD1AF"
+    android:background="#EAC2F8"
     tools:context=".SignupActivity">
 
     <ScrollView
@@ -74,7 +74,7 @@
                 android:id="@+id/button_signup"
                 android:textStyle="bold"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/black"
+                android:backgroundTint="@color/purple_200"
                 android:textAppearance="?android:textAppearanceMedium" />
 
             <ImageView

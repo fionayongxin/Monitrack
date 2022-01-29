@@ -6,16 +6,15 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:id="@+id/bottomNavigationbar"
-        app:menu="@menu/bottommenu"
-        android:background="#ACD1AF"
+        android:layout_alignParentBottom="true"
+        android:background="#FFEDA3"
+        app:itemIconTint="@color/black"
         app:itemTextColor="@color/black"
-        app:itemIconTint="@color/black">
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        app:menu="@menu/bottommenu"></com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <FrameLayout
         android:id="@+id/main_frame"
