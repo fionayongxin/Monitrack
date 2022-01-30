@@ -78,7 +78,7 @@ public class IncomeFragment extends Fragment {
         sumIncome=myview.findViewById(R.id.income_txt_result);
 
         recView=myview.findViewById(R.id.recycler_id_income);
-
+//create new object for linear layout manager
         LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
 
         layoutManager.setReverseLayout(true);
