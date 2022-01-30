@@ -27,7 +27,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private FrameLayout frameLayout;
     private ImageView navigationDrawer;
 
-    //Fragment
+    //Fragment variable
     private DashboardFragment dashBoardFragment;
     private IncomeFragment incomeFragment;
     private ExpenseFragment expenseFragment;
@@ -53,12 +53,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         bottomNavigationView = findViewById(R.id.bottomNavigationbar);
         frameLayout = findViewById(R.id.main_frame);
 
+        //create fragment objects
         dashBoardFragment=new DashboardFragment();
         incomeFragment = new IncomeFragment();
         expenseFragment = new ExpenseFragment();
 
         setFragment(dashBoardFragment);
 
+        //interactive functioning button
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -84,9 +86,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         });
-
     }
 
+    //set fragment function
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_frame, fragment);
@@ -143,7 +145,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
                 break;
-
         }
 
         if (fragment!=null) {

@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
+    //defining variable
     private EditText userEmail;
     private EditText userPass;
     private Button btnLogin;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         loginDetails();
     }
 
+    //login details function
     private void loginDetails() {
 
         userEmail = findViewById(R.id.email_login);
@@ -66,8 +68,7 @@ public class MainActivity extends AppCompatActivity {
                     userPass.setError("Password is required!");
                     return;
                 }
-
-                mDialog.setMessage("Processing...");
+                mDialog.setMessage("Processing!");
                 mDialog.show();
 
                 mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -84,11 +85,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
-
             }
         });
 
-        //Signup activity
+        //activity for sign up
         goSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //reset password activity
+        //activity for forgetting password
         forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

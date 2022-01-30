@@ -18,11 +18,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Type:"
-        android:gravity="center"
-        android:textColor="@color/nav_header"
-        android:id="@+id/type_Income_ds"
-        android:textAppearance="?android:textAppearanceLarge"
-        />
+            android:gravity="center"
+            android:textColor="@color/nav_header"
+            android:id="@+id/type_Income_ds"
+            android:textAppearance="?android:textAppearanceLarge"
+            />
 
         <TextView
             android:layout_width="match_parent"
@@ -30,7 +30,7 @@
             android:gravity="center"
             android:padding="5dp"
             android:text="Ammount:"
-            android:textColor="@color/income_color"
+            android:textColor="@color/word_color"
             android:layout_marginTop="10dp"
             android:textAppearance="?android:textAppearanceMedium"
             android:id="@+id/ammount_income_ds"
@@ -44,7 +44,7 @@
             android:gravity="center"
             android:padding="5dp"
             android:id="@+id/date_income_ds"
-            android:textColor="@color/income_color"
+            android:textColor="@color/word_color"
             android:layout_marginTop="10dp"
             />
 

@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class ResetPassActivity extends AppCompatActivity {
 
+    //defining variables
     private EditText emailEdit;
     private Button resetPasswordButton;
     private ProgressBar progressBar;
@@ -42,11 +43,11 @@ public class ResetPassActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 resetPassword();
-
             }
         });
     }
 
+    //reset password activity
     private void resetPassword() {
         String email = emailEdit.getText().toString().trim();
 
@@ -55,7 +56,6 @@ public class ResetPassActivity extends AppCompatActivity {
             emailEdit.requestFocus();
             return;
         }
-
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             emailEdit.setError("Please enter valid email.");
             emailEdit.requestFocus();
@@ -73,7 +73,7 @@ public class ResetPassActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }
                 else{
-                    Toast.makeText(ResetPassActivity.this, "Email not found.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ResetPassActivity.this, "Email is not found.", Toast.LENGTH_LONG).show();
                     FirebaseAuth.getInstance().signOut();
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }

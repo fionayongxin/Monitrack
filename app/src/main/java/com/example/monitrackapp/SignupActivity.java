@@ -20,15 +20,15 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SignupActivity extends AppCompatActivity {
 
+    //defining variable
     private EditText newEmail;
     private EditText newPass;
     private Button btnSignup;
     private TextView backLogin;
 
     private ProgressDialog mDialog;
-    //firebase
+    //firebase variable
     private FirebaseAuth mAuth;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,7 @@ public class SignupActivity extends AppCompatActivity {
         signup();
     }
 
+    //sign up activity
     private void signup(){
 
         newEmail=findViewById(R.id.email_signup);
@@ -55,15 +56,14 @@ public class SignupActivity extends AppCompatActivity {
                 String pass = newPass.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)) {
-                    newEmail.setError("Required field!");
+                    newEmail.setError("Required email field!");
                     return;
                 }
                 if (TextUtils.isEmpty(pass)) {
-                    newPass.setError("Required field!");
+                    newPass.setError("Required password field!");
                     return;
                 }
-
-                mDialog.setMessage("Processing...");
+                mDialog.setMessage("Processing");
 
                 mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -81,7 +81,6 @@ public class SignupActivity extends AppCompatActivity {
                         }
                     }
                 });
-
             }
         });
 
@@ -91,6 +90,5 @@ public class SignupActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
-
     }
 }

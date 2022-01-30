@@ -31,28 +31,28 @@ import java.util.Date;
 
 public class IncomeFragment extends Fragment {
 
-    //Firebase database
+    ////to declare variable firebase
 
     private FirebaseAuth mAuth;
     private DatabaseReference mIncomeDatabase;
 
-    //Recyclerview
+    //to declare variable recyclerView
     private RecyclerView recyclerView;
 
-    //Text view
+    //to declare textView variable
     private TextView incomeTotalSum;
 
-    //Update edit text.
+    //to declare editText variable
     private EditText edtAmmount;
     private EditText edtType;
     private EditText edtNote;
 
-    //button for update and delete;
+    //to declare button for update and delete
 
     private Button btnUpdate;
     private Button btnDelete;
 
-    //data item value
+    //to declare item inside the textView
 
     private String type;
     private String note;
@@ -73,6 +73,7 @@ public class IncomeFragment extends Fragment {
         FirebaseUser mUser=mAuth.getCurrentUser();
         String uid =mUser.getUid();
 
+//Create subdirectory at Firebase
         mIncomeDatabase= FirebaseDatabase.getInstance().getReference().child("IncomeData").child(uid);
         incomeTotalSum=myview.findViewById(R.id.income_txt_result);
 
@@ -84,7 +85,7 @@ public class IncomeFragment extends Fragment {
         layoutManager.setStackFromEnd(true);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
-
+//add value to the Firebase
         mIncomeDatabase.addValueEventListener(new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot){
@@ -109,7 +110,7 @@ public class IncomeFragment extends Fragment {
     @Override
     public void onStart(){
         super.onStart();
-
+//The FirebaseRecyclerAdapter binds a Query to a RecyclerView .
         FirebaseRecyclerAdapter<Data, MyViewHolder> adapter=new FirebaseRecyclerAdapter<Data, MyViewHolder>
                 (
                         Data.class,
@@ -141,7 +142,7 @@ public class IncomeFragment extends Fragment {
 
         recyclerView.setAdapter(adapter);
     }
-
+    //A ViewHolder describes an item view and metadata about its place within the RecyclerView.
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         View mView;
@@ -168,7 +169,7 @@ public class IncomeFragment extends Fragment {
             mAmmount.setText(stammount);
         }
     }
-
+    //to update the data item
     private void updateDataItem(){
         AlertDialog.Builder mydialog=new AlertDialog.Builder(getActivity());
         LayoutInflater inflater=LayoutInflater.from(getActivity());
@@ -179,7 +180,7 @@ public class IncomeFragment extends Fragment {
         edtType=myview.findViewById(R.id.type_edt);
         edtNote=myview.findViewById(R.id.note_edt);
 
-        //Set data to edit text..
+        //Set data to edit text
 
         edtType.setText(type);
         edtType.setSelection(type.length());
