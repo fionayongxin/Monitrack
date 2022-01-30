@@ -33,24 +33,24 @@ public class IncomeFragment extends Fragment {
 
     ////to declare variable firebase
 
-    private FirebaseAuth mAuth;
-    private DatabaseReference mIncomeDatabase;
+    private FirebaseAuth userAuth;
+    private DatabaseReference incomeDatabase;
 
     //to declare variable recyclerView
-    private RecyclerView recyclerView;
+    private RecyclerView recView;
 
     //to declare textView variable
-    private TextView incomeTotalSum;
+    private TextView sumIncome;
 
     //to declare editText variable
-    private EditText edtAmmount;
-    private EditText edtType;
-    private EditText edtNote;
+    private EditText AmountEdit;
+    private EditText TypeEdit;
+    private EditText NoteEdit;
 
     //to declare button for update and delete
 
-    private Button btnUpdate;
-    private Button btnDelete;
+    private Button UpdateBttn;
+    private Button DeleteBttn;
 
     //to declare item inside the textView
 
@@ -58,7 +58,7 @@ public class IncomeFragment extends Fragment {
     private String note;
     private int amount;
 
-    private String post_key;
+    private String keyPosition;
 
     public IncomeFragment() {
         // Required empty public constructor
@@ -68,34 +68,34 @@ public class IncomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View myview = inflater.inflate(R.layout.fragment_income, container, false);
 
-        mAuth= FirebaseAuth.getInstance();
+        userAuth= FirebaseAuth.getInstance();
 
-        FirebaseUser mUser=mAuth.getCurrentUser();
+        FirebaseUser mUser=userAuth.getCurrentUser();
         String uid =mUser.getUid();
 
 //Create subdirectory at Firebase
-        mIncomeDatabase= FirebaseDatabase.getInstance().getReference().child("IncomeData").child(uid);
-        incomeTotalSum=myview.findViewById(R.id.income_txt_result);
+        incomeDatabase= FirebaseDatabase.getInstance().getReference().child("IncomeData").child(uid);
+        sumIncome=myview.findViewById(R.id.income_txt_result);
 
-        recyclerView=myview.findViewById(R.id.recycler_id_income);
+        recView=myview.findViewById(R.id.recycler_id_income);
 
         LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
 
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
+        recView.setHasFixedSize(true);
+        recView.setLayoutManager(layoutManager);
 //add value to the Firebase
-        mIncomeDatabase.addValueEventListener(new ValueEventListener(){
+        incomeDatabase.addValueEventListener(new ValueEventListener(){
             @Override
             public void onDataChange(DataSnapshot dataSnapshot){
-                int totlatvalue =0;
+                int tot =0;
 
                 for (DataSnapshot mysanapshot: dataSnapshot.getChildren()){
                     Data data=mysanapshot.getValue(Data.class);
-                    totlatvalue+=data.getAmount();
-                    String stTotalvale=String.valueOf(totlatvalue);
-                    incomeTotalSum.setText(stTotalvale+".00");
+                    tot+=data.getAmount();
+                    String stTotalvale=String.valueOf(tot);
+                    sumIncome.setText(stTotalvale+".00");
                 }
             }
             @Override
@@ -116,7 +116,7 @@ public class IncomeFragment extends Fragment {
                         Data.class,
                         R.layout.income_recycler_data,
                         MyViewHolder.class,
-                        mIncomeDatabase
+                        incomeDatabase
                 ){
             @Override
             protected void populateViewHolder(MyViewHolder viewHolder, Data model, int position){
@@ -125,10 +125,10 @@ public class IncomeFragment extends Fragment {
                 viewHolder.setDate(model.getDate());
                 viewHolder.setAmmount(model.getAmount());
 
-                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                viewHolder.userView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        post_key=getRef(position).getKey();
+                        keyPosition=getRef(position).getKey();
                         type=model.getType();
                         note=model.getNote();
                         amount=model.getAmount();
@@ -140,31 +140,31 @@ public class IncomeFragment extends Fragment {
 
         };
 
-        recyclerView.setAdapter(adapter);
+        recView.setAdapter(adapter);
     }
     //A ViewHolder describes an item view and metadata about its place within the RecyclerView.
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        View mView;
+        View userView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            mView=itemView;
+            userView=itemView;
         }
         private void setType(String type){
-            TextView mType=mView.findViewById(R.id.type_txt_income);
+            TextView mType=userView.findViewById(R.id.type_txt_income);
             mType.setText(type);
         }
         private void setNote(String note){
-            TextView mNote=mView.findViewById(R.id.note_txt_income);
+            TextView mNote=userView.findViewById(R.id.note_txt_income);
             mNote.setText(note);
         }
         private void setDate(String date){
-            TextView mDate=mView.findViewById(R.id.date_txt_income);
+            TextView mDate=userView.findViewById(R.id.date_txt_income);
             mDate.setText(date);
         }
         private void setAmmount(int ammount){
-            TextView mAmmount=mView.findViewById(R.id.ammount_txt_income);
+            TextView mAmmount=userView.findViewById(R.id.ammount_txt_income);
             String stammount=String.valueOf(ammount);
             mAmmount.setText(stammount);
         }
@@ -176,54 +176,54 @@ public class IncomeFragment extends Fragment {
         View myview=inflater.inflate(R.layout.update_data_item,null);
         mydialog.setView(myview);
 
-        edtAmmount=myview.findViewById(R.id.amount_edt);
-        edtType=myview.findViewById(R.id.type_edt);
-        edtNote=myview.findViewById(R.id.note_edt);
+        AmountEdit=myview.findViewById(R.id.amount_edt);
+        TypeEdit=myview.findViewById(R.id.type_edt);
+        NoteEdit=myview.findViewById(R.id.note_edt);
 
         //Set data to edit text
 
-        edtType.setText(type);
-        edtType.setSelection(type.length());
+        TypeEdit.setText(type);
+        TypeEdit.setSelection(type.length());
 
-        edtNote.setText(note);
-        edtNote.setSelection(note.length());
+        NoteEdit.setText(note);
+        NoteEdit.setSelection(note.length());
 
-        edtAmmount.setText(String.valueOf(amount));
-        edtAmmount.setSelection(String.valueOf(amount).length());
+        AmountEdit.setText(String.valueOf(amount));
+        AmountEdit.setSelection(String.valueOf(amount).length());
 
 
 
-        btnUpdate=myview.findViewById(R.id.btn_upd_Update);
-        btnDelete=myview.findViewById(R.id.btnuPD_Delete);
+        UpdateBttn=myview.findViewById(R.id.btn_upd_Update);
+        DeleteBttn=myview.findViewById(R.id.btnuPD_Delete);
 
         AlertDialog dialog= mydialog.create();
 
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
+        UpdateBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                type=edtType.getText().toString().trim();
-                note=edtNote.getText().toString().trim();
+                type=TypeEdit.getText().toString().trim();
+                note=NoteEdit.getText().toString().trim();
 
                 String mdammount=String.valueOf(amount);
 
-                mdammount=edtAmmount.getText().toString().trim();
+                mdammount=AmountEdit.getText().toString().trim();
 
                 int myAmmount=Integer.parseInt(mdammount);
 
                 String mDate= DateFormat.getDateInstance().format(new Date());
-                Data data=new Data(myAmmount,type,note,post_key,mDate);
+                Data data=new Data(myAmmount,type,note,keyPosition,mDate);
 
-                mIncomeDatabase.child(post_key).setValue(data);
+                incomeDatabase.child(keyPosition).setValue(data);
 
                 dialog.dismiss();
 
             }
         });
-        btnDelete.setOnClickListener(new View.OnClickListener() {
+        DeleteBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                mIncomeDatabase.child(post_key).removeValue();
+                incomeDatabase.child(keyPosition).removeValue();
                 dialog.dismiss();
 
             }
