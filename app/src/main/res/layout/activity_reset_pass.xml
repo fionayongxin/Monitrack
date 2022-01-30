@@ -17,16 +17,16 @@
         tools:ignore="MissingConstraints">
 
         <TextView
+            android:id="@+id/forgot_password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
+            android:layout_height="199dp"
+            android:layout_marginBottom="30dp"
             android:gravity="center"
+            android:paddingTop="140dp"
             android:text="Reset Password"
             android:textAppearance="?android:textAppearanceLarge"
-            android:textStyle="bold"
-            android:paddingTop="150dp"
             android:textColor="@color/black"
-            android:id="@+id/forgot_password"/>
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/reset_pass_icon"
@@ -42,7 +42,7 @@
             android:layout_marginHorizontal="50dp"
             android:padding="15dp"
             android:hint="Email"
-            android:background="#30ffffff" />
+            android:background="#30ffffff"/>
 
         <Button
             android:id="@+id/reset_password"

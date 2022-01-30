@@ -23,9 +23,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    private BottomNavigationView bottomNavView;
+    private BottomNavigationView bottomNavigationView;
     private FrameLayout frameLayout;
-    private ImageView navDrawer;
+    private ImageView navigationDrawer;
 
     //Fragment variable
     private DashboardFragment dashBoardFragment;
@@ -50,7 +50,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        bottomNavView = findViewById(R.id.bottomNavigationbar);
+        bottomNavigationView = findViewById(R.id.bottomNavigationbar);
         frameLayout = findViewById(R.id.main_frame);
 
         //create fragment objects
@@ -60,25 +60,25 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         setFragment(dashBoardFragment);
 
-        //interactive functioning button
-        bottomNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+        //interactive functioning button -the bottom navigation bar menu
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
 
                     case R.id.dashboard:
                         setFragment(dashBoardFragment);
-                        bottomNavView.setItemBackgroundResource(R.color.dashboard_color);
+                        bottomNavigationView.setItemBackgroundResource(R.color.dashboard_color);
                         return true;
 
                     case R.id.income:
                         setFragment(incomeFragment);
-                        bottomNavView.setItemBackgroundResource(R.color.income_color);
+                        bottomNavigationView.setItemBackgroundResource(R.color.income_color);
                         return true;
 
                     case R.id.expense:
                         setFragment(expenseFragment);
-                        bottomNavView.setItemBackgroundResource(R.color.expense_color);
+                        bottomNavigationView.setItemBackgroundResource(R.color.expense_color);
                         return true;
 
                     default:
@@ -95,6 +95,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
     }
 
+    //open and close navigation drawer
     @Override
     public void onBackPressed() {
 
@@ -110,9 +111,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     //if user choose from navigation drawer
-    public void displaySelectedListner(int Item){
+    public void displaySelectedListner(int itemId){
         Fragment fragment = null;
-        switch (Item){
+        switch (itemId){
             case R.id.dashboard:
                 fragment =new DashboardFragment();
                 break;

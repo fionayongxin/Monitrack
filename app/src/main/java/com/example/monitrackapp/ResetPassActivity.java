@@ -22,8 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 public class ResetPassActivity extends AppCompatActivity {
 
     //defining variables
-    private EditText emailEdit;
-    private Button resetPasswordButton;
+    private EditText userEmail;
+    private Button resetButton;
     private ProgressBar progressBar;
 
     FirebaseAuth mAuth;
@@ -33,13 +33,16 @@ public class ResetPassActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_pass);
 
-        emailEdit = (EditText) findViewById(R.id.email_reset_pass);
-        resetPasswordButton = (Button) findViewById(R.id.reset_password);
+        //link with layout
+        userEmail = (EditText) findViewById(R.id.email_reset_pass);
+        resetButton = (Button) findViewById(R.id.reset_password);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
+        //get firebase instance
         mAuth = FirebaseAuth.getInstance();
 
-        resetPasswordButton.setOnClickListener(new View.OnClickListener() {
+        //after click reset password button
+        resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 resetPassword();
@@ -49,16 +52,19 @@ public class ResetPassActivity extends AppCompatActivity {
 
     //reset password activity
     private void resetPassword() {
-        String email = emailEdit.getText().toString().trim();
+        //get email to string
+        String email = userEmail.getText().toString().trim();
 
+        //error message if email empty
         if(email.isEmpty()) {
-            emailEdit.setError("Email field is mandatory!");
-            emailEdit.requestFocus();
+            userEmail.setError("Email field is mandatory!");
+            userEmail.requestFocus();
             return;
         }
+        //error message if email not available in firebase
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailEdit.setError("Please enter valid email.");
-            emailEdit.requestFocus();
+            userEmail.setError("Please enter valid email.");
+            userEmail.requestFocus();
             return;
         }
 
@@ -67,16 +73,17 @@ public class ResetPassActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
+                //success message
                 if(task.isSuccessful()) {
                     Toast.makeText(ResetPassActivity.this, "Check your email to reset password.", Toast.LENGTH_LONG).show();
-                    FirebaseAuth.getInstance().signOut();
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }
+                //unsuccessful message
                 else{
                     Toast.makeText(ResetPassActivity.this, "Email is not found.", Toast.LENGTH_LONG).show();
-                    FirebaseAuth.getInstance().signOut();
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }
+                //return to login page
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
     }
